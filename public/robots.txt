@@ -1,0 +1,22 @@
+# Robots.txt for ItayOst.com
+# Allow all crawlers
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: *.pdf$
+
+# Sitemap location
+Sitemap: https://www.itayost.com/sitemap.xml
+
+# Crawl-delay (optional - slows down crawling if needed)
+# Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+
+# Bing specific
+User-agent: Bingbot
+Allow: /

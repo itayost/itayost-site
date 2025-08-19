@@ -2,13 +2,14 @@ export const SITE_CONFIG = {
   name: 'ItayOst',
   title: 'פיתוח דיגיטלי לעסקים',
   description: 'אפליקציות, אתרים ומערכות מותאמות אישית שמביאות תוצאות',
-  email: 'contact@itayost.com',
-  phone: '050-1234567',
+  email: 'itayost1@gmail.com',
+  phone: '054-4994417',
   social: {
-    linkedin: '#',
-    github: '#',
-    email: 'mailto:contact@itayost.com',
-    whatsapp: '#'
+    linkedin: 'https://www.linkedin.com/in/itayost/',
+    instagram: 'https://www.instagram.com/itayost/',
+    facebook: 'https://www.facebook.com/itayost/',
+    email: 'mailto:itayost1@gmail.com',
+    whatsapp: 'https://wa.me/972544994417'
   }
 };
 
