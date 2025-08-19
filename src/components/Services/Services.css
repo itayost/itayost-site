@@ -1,0 +1,80 @@
+.services {
+  padding: 100px 20px;
+  background: var(--primary);
+  position: relative;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.service-card {
+  background: linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, rgba(100, 255, 218, 0.02) 100%);
+  border: 2px solid rgba(100, 255, 218, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.service-card:hover::before {
+  opacity: 0.05;
+}
+
+.service-card:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 30px 60px rgba(100, 255, 218, 0.2);
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.service-card h3 {
+  color: var(--secondary);
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.service-list {
+  list-style: none;
+  color: var(--light);
+  line-height: 2;
+  text-align: right;
+}
+
+.service-list li::before {
+  content: '◆';
+  color: var(--secondary);
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 60px 20px;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,8 @@
+@import './styles/variables.css';
+@import './styles/global.css';
+@import './styles/animations.css';
+
+.App {
+  min-height: 100vh;
+  background: var(--primary);
+}
