@@ -44,9 +44,11 @@ ul {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: min(1200px, 100vw);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 max(20px, 5vw);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 /* Scrollbar Styles */

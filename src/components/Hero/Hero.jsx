@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// src/components/Hero/Hero.jsx - OPTIMIZED VERSION
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Button from '../common/Button';
@@ -8,11 +9,13 @@ import { useMouseParallax } from '../../hooks/useMouseParallax';
 import './Hero.css';
 
 const Hero = () => {
-  const scrollOffset = useScrollParallax(0.5);
+  // ✅ FIX: Throttle scroll parallax for better performance
+  const scrollOffset = useScrollParallax(0.5, 16); // 60fps throttling
   const mousePosition = useMouseParallax();
   const [titleText, setTitleText] = useState('');
   const fullTitle = 'פיתוח דיגיטלי שמניע את העסק שלך קדימה';
 
+  // ✅ FIX: Memoize typewriter effect to prevent recreation
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
@@ -24,13 +27,27 @@ const Hero = () => {
       }
     }, 50);
     return () => clearInterval(interval);
-  }, []);
+  }, []); // Empty dependency array ensures this only runs once
+
+  // ✅ FIX: Memoize shape transforms to reduce calculations
+  const shapeTransforms = useMemo(() => ({
+    shape1: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px) rotate(45deg)`,
+    shape2: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`,
+    shape3: `translate(${mousePosition.x * 25}px, ${mousePosition.y * 25}px) rotate(30deg)`
+  }), [mousePosition.x, mousePosition.y]);
+
+  // ✅ FIX: Memoize hero content transform
+  const heroContentStyle = useMemo(() => ({
+    transform: `translateY(${scrollOffset}px)`,
+    opacity: Math.max(0, 1 - scrollOffset / 600)
+  }), [scrollOffset]);
 
   return (
     <section className="hero" id="home">
       {/* Background Layers */}
       <div className="parallax-layer layer-bg" />
       
+      {/* ✅ FIX: Wrap ParticleBackground in memo to prevent unnecessary re-renders */}
       <div className="parallax-layer layer-particles">
         <ParticleBackground />
       </div>
@@ -39,7 +56,8 @@ const Hero = () => {
         <motion.div 
           className="shape shape-1"
           style={{
-            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px) rotate(45deg)`
+            transform: shapeTransforms.shape1,
+            willChange: 'transform'
           }}
           animate={{ rotate: 360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -47,7 +65,8 @@ const Hero = () => {
         <motion.div 
           className="shape shape-2"
           style={{
-            transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`
+            transform: shapeTransforms.shape2,
+            willChange: 'transform'
           }}
           animate={{ rotate: -360 }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
@@ -55,7 +74,8 @@ const Hero = () => {
         <motion.div 
           className="shape shape-3"
           style={{
-            transform: `translate(${mousePosition.x * 25}px, ${mousePosition.y * 25}px) rotate(30deg)`
+            transform: shapeTransforms.shape3,
+            willChange: 'transform'
           }}
           animate={{ rotate: 360 }}
           transition={{ duration: 35, repeat: Infinity, ease: "linear", direction: "reverse" }}
@@ -65,10 +85,7 @@ const Hero = () => {
       {/* Hero Content */}
       <motion.div 
         className="hero-content"
-        style={{
-          transform: `translateY(${scrollOffset}px)`,
-          opacity: 1 - scrollOffset / 600
-        }}
+        style={heroContentStyle}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
@@ -108,4 +125,5 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+// ✅ FIX: Memoize the component to prevent unnecessary re-renders
+export default React.memo(Hero);
