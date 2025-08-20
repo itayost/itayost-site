@@ -1,32 +1,64 @@
+/* Add to the beginning of animations.css */
+.animate-fadeInUp,
+.animate-fadeIn,
+.animate-float,
+.animate-rotate,
+.animate-pulse,
+.animate-glow,
+.animate-bounce,
+.animate-slideInLeft,
+.animate-slideInRight {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translate3d(0, 30px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes fadeIn {
+@keyframes slideInLeft {
   from {
     opacity: 0;
+    transform: translate3d(-100px, 0, 0);
   }
   to {
     opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0) translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   33% {
-    transform: translateY(-30px) translateX(30px);
+    transform: translate3d(30px, -30px, 0);
   }
   66% {
-    transform: translateY(30px) translateX(-30px);
+    transform: translate3d(-30px, 30px, 0);
   }
 }
 
