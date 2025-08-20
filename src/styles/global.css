@@ -1,50 +1,14 @@
-/* global.css - Complete rewrite with mobile optimization and anti-flickering */
 @import './variables.css';
-
-/* ===============================================
-   Reset & Base Styles
-   =============================================== */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* Prevent flickering on all elements */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: transparent;
-  /* Force hardware acceleration globally */
-  -webkit-transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
-
-*::before,
-*::after {
-  box-sizing: inherit;
-  -webkit-transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* ===============================================
-   HTML & Body
-   =============================================== */
 
 html {
   scroll-behavior: smooth;
   direction: rtl;
-  /* Optimize scrolling on mobile */
-  -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
-  /* Prevent text size adjustment on orientation change */
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  /* Improve rendering */
-  text-rendering: optimizeLegibility;
-  /* Prevent overscroll on iOS */
-  overscroll-behavior-y: none;
 }
 
 body {
@@ -53,51 +17,12 @@ body {
   color: var(--white);
   overflow-x: hidden;
   line-height: 1.6;
-  /* Prevent overscroll bounce on iOS */
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
-  /* Optimize font rendering */
-  font-variant-ligatures: normal;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  /* Ensure full height on mobile */
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
-
-/* ===============================================
-   Typography
-   =============================================== */
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.2;
-  /* Prevent flickering on headings */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-p {
-  line-height: 1.6;
-  /* Optimize text rendering */
-  text-rendering: optimizeLegibility;
-}
-
-/* ===============================================
-   Links & Buttons
-   =============================================== */
 
 a {
   text-decoration: none;
   color: inherit;
   transition: var(--transition);
-  /* Prevent flickering on hover */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
 button {
@@ -106,88 +31,17 @@ button {
   border: none;
   outline: none;
   background: none;
-  /* Ensure proper touch targets on mobile */
-  min-height: 44px;
-  min-width: 44px;
-  /* Prevent flickering */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  /* Remove iOS button styling */
-  -webkit-appearance: none;
-  appearance: none;
 }
-
-/* Remove focus outline for mouse users, keep for keyboard */
-button:focus:not(:focus-visible) {
-  outline: none;
-}
-
-button:focus-visible {
-  outline: 2px solid var(--secondary);
-  outline-offset: 2px;
-}
-
-/* ===============================================
-   Images & Media
-   =============================================== */
 
 img {
   max-width: 100%;
   height: auto;
   display: block;
-  /* Optimize image rendering */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  /* Prevent flickering during load */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  /* Lazy loading optimization */
-  content-visibility: auto;
 }
 
-video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ===============================================
-   Lists
-   =============================================== */
-
-ul, ol {
+ul {
   list-style: none;
 }
-
-/* ===============================================
-   Forms
-   =============================================== */
-
-input,
-textarea,
-select {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  /* Prevent zoom on iOS when focusing inputs */
-  font-size: 16px;
-  /* Remove iOS styling */
-  -webkit-appearance: none;
-  appearance: none;
-  /* Prevent flickering */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* ===============================================
-   Layout Containers
-   =============================================== */
 
 .container {
   max-width: min(1200px, 100vw);
@@ -195,22 +49,11 @@ select {
   padding: 0 max(20px, 5vw);
   overflow-x: hidden;
   overflow-y: hidden;
-  /* Optimize container rendering */
-  contain: layout style;
-  /* Prevent flickering */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
-/* ===============================================
-   Scrollbar Styles
-   =============================================== */
-
+/* Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -220,34 +63,13 @@ select {
 ::-webkit-scrollbar-thumb {
   background: var(--secondary);
   border-radius: 5px;
-  /* Add hover effect only on desktop */
-  transition: background 0.3s ease;
 }
 
-@media (hover: hover) {
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4AC9B0;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #4AC9B0;
 }
 
-/* Hide scrollbar on mobile for better UX */
-@media (max-width: 768px) {
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
-  }
-  
-  /* Alternative for Firefox */
-  * {
-    scrollbar-width: none;
-  }
-}
-
-/* ===============================================
-   Utility Classes
-   =============================================== */
-
+/* Utility Classes */
 .text-center {
   text-align: center;
 }
@@ -286,136 +108,8 @@ select {
   display: none;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* ===============================================
-   Mobile-Specific Optimizations
-   =============================================== */
-
 @media (max-width: 768px) {
   html {
     font-size: 14px;
   }
-  
-  body {
-    /* Optimize for mobile rendering */
-    -webkit-font-smoothing: subpixel-antialiased;
-  }
-  
-  /* Reduce padding on mobile */
-  .container {
-    padding: 0 15px;
-  }
-  
-  /* Optimize touch interactions */
-  a, button {
-    touch-action: manipulation;
-  }
-  
-  /* Ensure inputs don't zoom on iOS */
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  textarea,
-  select {
-    font-size: 16px !important;
-  }
-}
-
-/* ===============================================
-   Touch Device Optimizations
-   =============================================== */
-
-@media (hover: none) and (pointer: coarse) {
-  /* Remove hover effects on touch devices */
-  a:hover,
-  button:hover {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  
-  /* Optimize for touch scrolling */
-  * {
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-  }
-}
-
-/* ===============================================
-   Reduced Motion Support
-   =============================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* ===============================================
-   iOS Specific Fixes
-   =============================================== */
-
-@supports (-webkit-touch-callout: none) {
-  /* iOS only styles */
-  body {
-    /* Fix for iOS rubber band scrolling */
-    position: fixed;
-    width: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Fix height on iOS Safari */
-  .container {
-    min-height: -webkit-fill-available;
-  }
-}
-
-/* ===============================================
-   Performance Optimizations
-   =============================================== */
-
-/* Optimize rendering for animated elements */
-[class*="animate-"],
-[data-animate] {
-  will-change: transform, opacity;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-}
-
-/* Optimize grid and flex containers */
-.grid,
-.flex {
-  contain: layout style;
-}
-
-/* Prevent layout shifts */
-section {
-  contain: layout style paint;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
 }
