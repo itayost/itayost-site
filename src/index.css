@@ -1,7 +1,34 @@
+/* index.css - Complete rewrite with mobile optimization and anti-flickering */
 @import './styles/variables.css';
 @import './styles/global.css';
 @import './styles/animations.css';
 
+/* ===============================================
+   Global Anti-Flickering & Performance Settings
+   =============================================== */
+
+/* Prevent text and animation flickering globally */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+/* Force hardware acceleration for all transformed elements */
+*,
+*::before,
+*::after {
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ===============================================
+   Animation-Specific Optimizations
+   =============================================== */
+
+/* Fix for all animated elements */
 [class*="animate-"] {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -9,34 +36,193 @@
   backface-visibility: hidden;
   -webkit-perspective: 1000px;
   perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
+/* ===============================================
+   Component-Specific Anti-Flickering
+   =============================================== */
+
+/* Prevent flickering on all card components */
 .portfolio-item,
 .service-card,
 .feature-card,
-.process-content {
+.process-content,
+.contact-form,
+.hero-content {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   will-change: transform, opacity;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
-/* Prevent animation flickering globally */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Ensure smooth animations */
-*,
-*::before,
-*::after {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Fix for elements with animations */
-[class*="animate-"] {
+/* Optimize images to prevent layout shift */
+img {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ===============================================
+   Framer Motion Specific Fixes
+   =============================================== */
+
+/* Fix for Framer Motion elements */
+[data-framer-component-type],
+[style*="transform"] {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Prevent layout shifts during animations */
+.portfolio-grid,
+.services-grid,
+.features-grid,
+.process-timeline {
+  contain: layout style paint;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* ===============================================
+   Mobile-Specific Optimizations
+   =============================================== */
+
+@media (max-width: 768px) {
+  /* Optimize transitions for mobile */
+  .portfolio-item,
+  .service-card,
+  .feature-card,
+  .process-content {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Disable parallax effects on mobile for better performance */
+  .parallax-layer {
+    transform: none !important;
+  }
+  
+  /* Optimize font rendering on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+/* ===============================================
+   Touch Device Optimizations
+   =============================================== */
+
+/* Disable hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .portfolio-item:hover,
+  .service-card:hover,
+  .feature-card:hover,
+  .process-content:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Remove hover transitions on touch devices */
+  .portfolio-item,
+  .service-card,
+  .feature-card,
+  .process-content {
+    transition: none;
+  }
+  
+  /* Ensure buttons and links have proper touch targets */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Disable all transitions on touch interaction */
+@media (hover: none) {
+  * {
+    transition-duration: 0ms !important;
+  }
+  
+  /* Re-enable transitions for specific elements that need them */
+  .animate-fadeInUp,
+  .animate-fadeIn,
+  .animate-slideInLeft,
+  .animate-slideInRight {
+    transition-duration: inherit !important;
+  }
+}
+
+/* ===============================================
+   Performance Optimizations
+   =============================================== */
+
+/* Use GPU acceleration for scrolling */
+.App {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+/* Optimize scroll performance */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent overscroll bounce on iOS */
+body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===============================================
+   Accessibility & Reduced Motion
+   =============================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .parallax-layer {
+    transform: none !important;
+  }
+}
+
+/* ===============================================
+   iOS Specific Fixes
+   =============================================== */
+
+@supports (-webkit-touch-callout: none) {
+  /* iOS only styles */
+  * {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  
+  /* Fix for iOS Safari flickering */
+  .portfolio-item,
+  .service-card,
+  .feature-card,
+  .process-content {
+    -webkit-transform: translateZ(0);
+    -webkit-perspective: 1000;
+  }
 }

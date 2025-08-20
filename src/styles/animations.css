@@ -1,6 +1,6 @@
-/* Fixed animations.css - Optimized for mobile to prevent flickering */
+/* animations.css - Complete rewrite with mobile optimization */
 
-/* Global animation optimization for mobile */
+/* Global animation optimization - Prevent flickering on all animated elements */
 .animate-fadeInUp,
 .animate-fadeIn,
 .animate-float,
@@ -16,12 +16,12 @@
   perspective: 1000px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  will-change: transform, opacity;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
-/* Keyframe Definitions - Using translate3d for hardware acceleration */
+/* Keyframe Definitions - All use translate3d for hardware acceleration */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -36,9 +36,11 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translate3d(0, 0, 0);
   }
   to {
     opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -95,10 +97,10 @@
 }
 
 @keyframes glow {
-  from {
+  0% {
     filter: drop-shadow(0 0 20px rgba(100, 255, 218, 0.3));
   }
-  to {
+  100% {
     filter: drop-shadow(0 0 30px rgba(100, 255, 218, 0.5));
   }
 }
@@ -115,7 +117,7 @@
   }
 }
 
-/* Animation Classes with proper fill-mode and timing */
+/* Animation Classes with optimized timing functions */
 .animate-fadeInUp {
   animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
   animation-fill-mode: both;
@@ -158,9 +160,13 @@
 
 /* Mobile-specific optimizations */
 @media (max-width: 768px) {
-  /* Reduce animation duration on mobile for better performance */
+  /* Reduce animation duration on mobile for smoother performance */
   .animate-fadeInUp {
     animation-duration: 0.6s;
+  }
+  
+  .animate-fadeIn {
+    animation-duration: 0.8s;
   }
   
   .animate-slideInLeft,
@@ -168,25 +174,53 @@
     animation-duration: 0.6s;
   }
   
-  /* Disable complex animations on low-power devices */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-  
-  /* Reduce float and rotate animation complexity on mobile */
+  /* Disable complex infinite animations on mobile to save battery */
   .animate-float {
     animation: none;
     transform: translate3d(0, 0, 0);
   }
   
   .animate-rotate {
-    animation-duration: 60s;
+    animation-duration: 60s; /* Slower rotation on mobile */
+  }
+  
+  .animate-pulse {
+    animation: none; /* Disable pulse on mobile */
+    transform: scale3d(1, 1, 1);
+  }
+  
+  .animate-glow {
+    animation-duration: 4s; /* Slower glow on mobile */
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float,
+  .animate-rotate,
+  .animate-pulse,
+  .animate-glow,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Ensure animations complete properly on touch devices */
+  [class*="animate-"] {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 }
