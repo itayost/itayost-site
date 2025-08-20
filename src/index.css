@@ -1,3 +1,22 @@
 @import './styles/variables.css';
 @import './styles/global.css';
 @import './styles/animations.css';
+
+/* Prevent animation flickering globally */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure smooth animations */
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for elements with animations */
+[class*="animate-"] {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
