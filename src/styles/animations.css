@@ -125,11 +125,23 @@
 
 /* Animation Classes */
 .animate-fadeInUp {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.8s ease-out both;
+  animation-fill-mode: both;
 }
 
 .animate-fadeIn {
-  animation: fadeIn 1s ease-out forwards;
+  animation: fadeIn 1s ease-out both;
+  animation-fill-mode: both;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.8s ease-out both;
+  animation-fill-mode: both;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.8s ease-out both;
+  animation-fill-mode: both;
 }
 
 .animate-float {

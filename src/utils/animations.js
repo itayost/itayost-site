@@ -1,7 +1,19 @@
 export const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, ease: "easeOut" }
+  initial: { 
+    opacity: 0, 
+    y: 30,
+    willChange: "transform, opacity",
+    backfaceVisibility: "hidden"
+  },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      type: "tween"
+    }
+  }
 };
 
 export const fadeIn = {
@@ -17,15 +29,39 @@ export const scaleIn = {
 };
 
 export const slideInLeft = {
-  initial: { x: -100, opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  transition: { duration: 0.8, ease: "easeOut" }
+  initial: { 
+    x: -100, 
+    opacity: 0,
+    willChange: "transform, opacity",
+    backfaceVisibility: "hidden"
+  },
+  animate: { 
+    x: 0, 
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      type: "tween"
+    }
+  }
 };
 
 export const slideInRight = {
-  initial: { x: 100, opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  transition: { duration: 0.8, ease: "easeOut" }
+  initial: { 
+    x: 100, 
+    opacity: 0,
+    willChange: "transform, opacity",
+    backfaceVisibility: "hidden"
+  },
+  animate: { 
+    x: 0, 
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      type: "tween"
+    }
+  }
 };
 
 export const staggerContainer = {
