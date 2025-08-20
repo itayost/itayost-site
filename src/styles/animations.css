@@ -1,4 +1,6 @@
-/* Add to the beginning of animations.css */
+/* Fixed animations.css - Optimized for mobile to prevent flickering */
+
+/* Global animation optimization for mobile */
 .animate-fadeInUp,
 .animate-fadeIn,
 .animate-float,
@@ -15,8 +17,11 @@
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   will-change: transform, opacity;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
+/* Keyframe Definitions - Using translate3d for hardware acceleration */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -25,6 +30,15 @@
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -64,19 +78,19 @@
 
 @keyframes rotate {
   from {
-    transform: rotate(0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
 @keyframes pulse {
   0%, 100% {
-    transform: scale(1);
+    transform: scale3d(1, 1, 1);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale3d(1.05, 1.05, 1);
   }
 }
 
@@ -91,75 +105,88 @@
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
-    transform: translateX(-50%) translateY(0);
+    transform: translate3d(-50%, 0, 0);
   }
   40% {
-    transform: translateX(-50%) translateY(-10px);
+    transform: translate3d(-50%, -10px, 0);
   }
   60% {
-    transform: translateX(-50%) translateY(-5px);
+    transform: translate3d(-50%, -5px, 0);
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Animation Classes */
+/* Animation Classes with proper fill-mode and timing */
 .animate-fadeInUp {
-  animation: fadeInUp 0.8s ease-out both;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
   animation-fill-mode: both;
 }
 
 .animate-fadeIn {
-  animation: fadeIn 1s ease-out both;
+  animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) both;
   animation-fill-mode: both;
 }
 
 .animate-slideInLeft {
-  animation: slideInLeft 0.8s ease-out both;
+  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
   animation-fill-mode: both;
 }
 
 .animate-slideInRight {
-  animation: slideInRight 0.8s ease-out both;
+  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
   animation-fill-mode: both;
 }
 
 .animate-float {
-  animation: float 20s infinite ease-in-out;
+  animation: float 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .animate-rotate {
-  animation: rotate 30s infinite linear;
+  animation: rotate 30s linear infinite;
 }
 
 .animate-pulse {
-  animation: pulse 2s infinite;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .animate-glow {
-  animation: glow 3s ease-in-out infinite alternate;
+  animation: glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
 }
 
 .animate-bounce {
-  animation: bounce 2s infinite;
+  animation: bounce 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation duration on mobile for better performance */
+  .animate-fadeInUp {
+    animation-duration: 0.6s;
+  }
+  
+  .animate-slideInLeft,
+  .animate-slideInRight {
+    animation-duration: 0.6s;
+  }
+  
+  /* Disable complex animations on low-power devices */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Reduce float and rotate animation complexity on mobile */
+  .animate-float {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .animate-rotate {
+    animation-duration: 60s;
+  }
 }

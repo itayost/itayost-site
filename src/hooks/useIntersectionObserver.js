@@ -1,7 +1,9 @@
+// Fixed useIntersectionObserver.js - Prevents re-triggering animations
 import { useEffect, useRef, useState } from 'react';
 
 export const useIntersectionObserver = (options = {}) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const targetRef = useRef(null);
 
   useEffect(() => {
@@ -10,7 +12,18 @@ export const useIntersectionObserver = (options = {}) => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
+        // Only trigger animation once to prevent flickering
+        if (entry.isIntersecting && !hasAnimated) {
+          setIsIntersecting(true);
+          setHasAnimated(true);
+          
+          // Optionally disconnect observer after animation triggers
+          if (options.once !== false) {
+            observer.disconnect();
+          }
+        } else if (!entry.isIntersecting && options.once === false) {
+          setIsIntersecting(false);
+        }
       },
       {
         threshold: 0.1,
@@ -22,9 +35,11 @@ export const useIntersectionObserver = (options = {}) => {
     observer.observe(target);
 
     return () => {
-      observer.unobserve(target);
+      if (target) {
+        observer.unobserve(target);
+      }
     };
-  }, [options]);
+  }, [hasAnimated, options]);
 
   return [targetRef, isIntersecting];
 };
