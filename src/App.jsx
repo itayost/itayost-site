@@ -1,5 +1,6 @@
 // src/App.jsx
 import React from 'react';
+import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
 import Portfolio from './components/Portfolio/Portfolio';
@@ -13,6 +14,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Hero />
       <Services />
       <Portfolio />
