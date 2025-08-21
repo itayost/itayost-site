@@ -6,7 +6,7 @@ import './Navbar.css';
 const Navbar = () => {
   useEffect(() => {
     const createNavbar = () => {
-      // Inject CSS fixes FIRST (same as FAB)
+      // Inject CSS fixes and animations FIRST
       if (!document.getElementById('navbar-fixes-style')) {
         const fixStyles = document.createElement('style');
         fixStyles.id = 'navbar-fixes-style';
@@ -21,6 +21,32 @@ const Navbar = () => {
             will-change: auto !important;
             contain: none !important;
           }
+          
+          /* Slide down animation */
+          @keyframes navbarSlideDown {
+            from {
+              transform: translateY(-100%);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+          
+          /* Apply animation to navbar */
+          .navbar-animate-in {
+            animation: navbarSlideDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+          }
+          
+          /* Reduced motion support */
+          @media (prefers-reduced-motion: reduce) {
+            .navbar-animate-in {
+              animation: none !important;
+              transform: translateY(0) !important;
+              opacity: 1 !important;
+            }
+          }
         `;
         document.head.appendChild(fixStyles);
       }
@@ -34,6 +60,7 @@ const Navbar = () => {
       // Create navbar element
       const navbar = document.createElement('nav');
       navbar.id = 'navbar-simple-fixed';
+      navbar.className = 'navbar-animate-in';
       navbar.style.cssText = `
         position: fixed !important;
         top: 0 !important;
@@ -46,11 +73,10 @@ const Navbar = () => {
         border-bottom: 1px solid rgba(100, 255, 218, 0.1) !important;
         z-index: 999990 !important;
         padding: 1.2rem 0 !important;
-        transition: all 0.3s ease !important;
-        transform: none !important;
+        transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease !important;
         filter: none !important;
         contain: none !important;
-        will-change: auto !important;
+        will-change: transform, opacity !important;
       `;
 
       // Create container
