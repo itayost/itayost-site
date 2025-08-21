@@ -76,6 +76,9 @@ const FeatureCard = React.memo(({ feature, index }) => {
     }
   } : {};
 
+  // Get the Icon component
+  const IconComponent = feature.Icon;
+
   return (
     <motion.div
       ref={ref}
@@ -103,7 +106,7 @@ const FeatureCard = React.memo(({ feature, index }) => {
           backfaceVisibility: 'hidden'
         }}
       >
-        {feature.icon}
+        <IconComponent size={32} strokeWidth={1.5} />
       </motion.div>
       
       <motion.h3

@@ -69,6 +69,7 @@
   font-weight: bold;
   font-size: 1.2rem;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(100, 255, 218, 0.3);
 }
 
 .process-content h3 {
@@ -82,29 +83,119 @@
   line-height: 1.6;
 }
 
+/* Tablet styles */
 @media (max-width: 768px) {
   .process {
     padding: 60px 20px;
   }
   
   .process-timeline::before {
-    left: 30px;
+    left: 25px;
   }
   
   .process-item {
     justify-content: flex-start;
-    padding-right: 60px;
+    padding-left: 70px;
+    padding-right: 0;
+    margin-bottom: 20px;
   }
   
   .process-item.even {
     justify-content: flex-start;
+    padding-left: 70px;
   }
   
   .process-content {
     width: 100%;
+    margin-left: 0 !important;
   }
   
   .process-number {
-    left: 30px;
+    left: 25px;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+  }
+  
+  .process-content h3 {
+    font-size: 1.2rem;
+  }
+  
+  .process-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .process {
+    padding: 50px 15px;
+  }
+  
+  .process-timeline::before {
+    left: 20px;
+    width: 1px;
+  }
+  
+  .process-item {
+    padding-left: 55px;
+    padding-right: 0;
+    margin-bottom: 25px;
+  }
+  
+  .process-item.even {
+    padding-left: 55px;
+  }
+  
+  .process-content {
+    padding: 20px;
+  }
+  
+  .process-number {
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .process-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  
+  .process-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .process-item {
+    padding-left: 50px;
+  }
+  
+  .process-item.even {
+    padding-left: 50px;
+  }
+  
+  .process-number {
+    left: 18px;
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+  
+  .process-content {
+    padding: 18px;
+  }
+  
+  .process-content h3 {
+    font-size: 1.05rem;
+  }
+  
+  .process-content p {
+    font-size: 0.85rem;
   }
 }

@@ -25,15 +25,27 @@
 }
 
 .feature-icon {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background: linear-gradient(135deg, var(--secondary) 0%, #4AC9B0 100%);
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  font-size: 28px;
+  transition: all 0.3s ease;
+}
+
+.feature-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #000000;
+  stroke-width: 1.5;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.05) rotate(5deg);
+  background: linear-gradient(135deg, #4AC9B0 0%, var(--secondary) 100%);
 }
 
 .feature-card h3 {
@@ -54,5 +66,15 @@
   
   .features-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .feature-icon svg {
+    width: 28px;
+    height: 28px;
   }
 }

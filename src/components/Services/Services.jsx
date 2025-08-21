@@ -72,6 +72,9 @@ const ServiceCard = React.memo(({ service, index }) => {
     }
   } : {};
 
+  // Get the Icon component
+  const IconComponent = service.Icon;
+
   return (
     <motion.div
       ref={ref}
@@ -98,7 +101,7 @@ const ServiceCard = React.memo(({ service, index }) => {
           backfaceVisibility: 'hidden'
         }}
       >
-        {service.icon}
+        <IconComponent size={48} strokeWidth={1.5} />
       </motion.div>
       
       <h3>{service.title}</h3>

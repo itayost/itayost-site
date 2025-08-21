@@ -1,7 +1,10 @@
+// src/data/services.js
+import { Monitor, Smartphone, Settings } from 'lucide-react';
+
 export const servicesData = [
   {
     id: 1,
-    icon: "🖥️",
+    Icon: Monitor,
     title: "אתרי אינטרנט",
     items: [
       "אתרי תדמית מרשימים",
@@ -12,7 +15,7 @@ export const servicesData = [
   },
   {
     id: 2,
-    icon: "📱",
+    Icon: Smartphone,
     title: "אפליקציות",
     items: [
       "Native Apps",
@@ -23,7 +26,7 @@ export const servicesData = [
   },
   {
     id: 3,
-    icon: "⚙️",
+    Icon: Settings,
     title: "מערכות עסקיות",
     items: [
       "CRM מותאם אישית",

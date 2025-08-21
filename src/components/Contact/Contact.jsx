@@ -170,18 +170,6 @@ const Contact = () => {
             );
           })}
         </motion.div>
-
-        <motion.div 
-          className="contact-footer"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <p className="contact-availability">
-            ⚡ זמין לפרויקטים חדשים
-          </p>
-        </motion.div>
       </div>
     </section>
   );
