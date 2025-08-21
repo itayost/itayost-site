@@ -1,3 +1,4 @@
+/* src/components/Portfolio/Portfolio.css */
 .portfolio {
   padding: 100px 20px;
   background: linear-gradient(180deg, #112240 0%, var(--primary) 100%);
@@ -18,7 +19,7 @@
   overflow: hidden;
   transition: all 0.3s ease;
   position: relative;
-  cursor: pointer;
+  cursor: default;
 }
 
 .portfolio-item:hover {
@@ -67,6 +68,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 .tech-tag {
@@ -78,6 +80,74 @@
   border: 1px solid rgba(100, 255, 218, 0.3);
 }
 
+/* New Link Button Styles */
+.portfolio-link-container {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.portfolio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--secondary) 0%, #4AC9B0 100%);
+  color: var(--primary);
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.portfolio-link:hover {
+  box-shadow: 0 10px 25px rgba(100, 255, 218, 0.3);
+  transform: translateY(-2px);
+}
+
+.portfolio-link:hover::before {
+  left: 100%;
+}
+
+.portfolio-link span {
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-link svg {
+  position: relative;
+  z-index: 1;
+}
+
+/* Alternative link styles for different link types */
+.portfolio-link.github-link {
+  background: linear-gradient(135deg, #6e5494 0%, #8b6bb1 100%);
+  color: white;
+}
+
+.portfolio-link.demo-link {
+  background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
+  color: white;
+}
+
+.portfolio-link.case-study-link {
+  background: linear-gradient(135deg, #42a5f5 0%, #2196f3 100%);
+  color: white;
+}
+
 @media (max-width: 768px) {
   .portfolio {
     padding: 60px 20px;
@@ -85,5 +155,10 @@
   
   .portfolio-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .portfolio-link-inline {
+    margin-left: 0; /* Don't push to right on mobile */
+    flex: 1 0 auto; /* Allow it to grow */
   }
 }

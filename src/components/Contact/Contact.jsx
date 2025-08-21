@@ -1,336 +1,187 @@
-// Contact.jsx - Optimized with anti-flickering and mobile performance
-import React, { useState, useMemo, useCallback } from 'react';
+// src/components/Contact/Contact.jsx
+import React from 'react';
 import { motion } from 'framer-motion';
+import { 
+  Mail, 
+  Phone, 
+  Linkedin, 
+  Facebook, 
+  Instagram 
+} from 'lucide-react';
 import SectionTitle from '../common/SectionTitle';
-import Button from '../common/Button';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import { SITE_CONFIG } from '../../utils/constants';
 import './Contact.css';
 
 const Contact = () => {
-  // Form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    projectType: '',
-    message: ''
-  });
-
-  // Loading state for form submission
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Use intersection observer for form animation
-  const [formRef, isFormVisible] = useIntersectionObserver({
-    threshold: 0.1,
-    once: true // Critical: only animate once
-  });
-
-  // Form animation variants with hardware acceleration
-  const formVariants = useMemo(() => ({
-    hidden: {
-      opacity: 0,
-      y: 30,
-      translateZ: 0,
-      scale: 0.98
-    },
+  // WhatsApp SVG Icon Component
+  const WhatsAppIcon = ({ size = 24, ...props }) => (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="currentColor"
+      {...props}
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  );
+  const containerVariants = {
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      translateZ: 0,
-      scale: 1,
       transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
         staggerChildren: 0.1,
         delayChildren: 0.2
       }
     }
-  }), []);
+  };
 
-  // Form field animation variants
-  const fieldVariants = useMemo(() => ({
-    hidden: {
-      opacity: 0,
-      x: -20,
-      translateZ: 0
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      translateZ: 0,
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
       transition: {
         duration: 0.5,
         ease: [0.4, 0, 0.2, 1]
       }
     }
-  }), []);
+  };
 
-  // Subtitle animation variants
-  const subtitleVariants = useMemo(() => ({
-    hidden: {
-      opacity: 0,
-      y: 20,
-      translateZ: 0
+  const contactMethods = [
+    {
+      id: 'whatsapp',
+      name: 'WhatsApp',
+      icon: WhatsAppIcon,
+      link: SITE_CONFIG.social.whatsapp,
+      color: '#25D366',
+      hoverColor: 'rgba(37, 211, 102, 0.1)',
+      label: 'שלחו הודעה'
     },
-    visible: {
-      opacity: 1,
-      y: 0,
-      translateZ: 0,
-      transition: {
-        duration: 0.6,
-        delay: 0.1,
-        ease: [0.4, 0, 0.2, 1]
-      }
+    {
+      id: 'phone',
+      name: 'טלפון',
+      icon: Phone,
+      link: `tel:+972544994417`,
+      color: '#64FFDA',
+      hoverColor: 'rgba(100, 255, 218, 0.1)',
+      label: '054-499-4417'
+    },
+    {
+      id: 'email',
+      name: 'אימייל',
+      icon: Mail,
+      link: SITE_CONFIG.social.email,
+      color: '#FF6B6B',
+      hoverColor: 'rgba(255, 107, 107, 0.1)',
+      label: 'itayost1@gmail.com'
+    },
+    {
+      id: 'linkedin',
+      name: 'LinkedIn',
+      icon: Linkedin,
+      link: SITE_CONFIG.social.linkedin,
+      color: '#0077B5',
+      hoverColor: 'rgba(0, 119, 181, 0.1)',
+      label: 'פרופיל מקצועי'
+    },
+    {
+      id: 'facebook',
+      name: 'Facebook',
+      icon: Facebook,
+      link: SITE_CONFIG.social.facebook,
+      color: '#1877F2',
+      hoverColor: 'rgba(24, 119, 242, 0.1)',
+      label: 'עמוד הפייסבוק'
+    },
+    {
+      id: 'instagram',
+      name: 'Instagram',
+      icon: Instagram,
+      link: SITE_CONFIG.social.instagram,
+      color: '#E4405F',
+      hoverColor: 'rgba(228, 64, 95, 0.1)',
+      label: 'עקבו אחרי'
     }
-  }), []);
-
-  // Memoized change handler
-  const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  }, []);
-
-  // Memoized submit handler
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    
-    // Prevent multiple submissions
-    if (isSubmitting) return;
-    
-    setIsSubmitting(true);
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Handle form submission here
-      console.log('Form submitted:', formData);
-      alert('תודה על פנייתך! אחזור אליך בהקדם.');
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        projectType: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error('Form submission error:', error);
-      alert('אירעה שגיאה. אנא נסה שוב.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [formData, isSubmitting]);
-
-  // Memoize viewport settings
-  const viewportSettings = useMemo(() => ({
-    once: true,
-    amount: 0.1,
-    margin: "0px 0px -50px 0px"
-  }), []);
+  ];
 
   return (
-    <section 
-      className="contact" 
-      id="contact"
-      style={{
-        contain: 'layout style paint',
-        willChange: 'transform',
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden'
-      }}
-    >
+    <section className="contact" id="contact">
       <div className="contact-container">
-        <SectionTitle>מוכנים להתחיל?</SectionTitle>
-        
+        <SectionTitle>בואו נדבר</SectionTitle>
         <motion.p 
           className="contact-subtitle"
-          variants={subtitleVariants}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          מוכן להפוך את הרעיון שלכם למציאות דיגיטלית?<br />
+          צרו קשר בכל דרך שנוחה לכם
+        </motion.p>
+
+        <motion.div 
+          className="contact-methods"
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportSettings}
-          style={{
-            willChange: 'transform, opacity',
-            transform: 'translateZ(0)',
-            backfaceVisibility: 'hidden'
-          }}
+          viewport={{ once: true }}
         >
-          בואו נבנה יחד את הפתרון הדיגיטלי המושלם לעסק שלכם
-        </motion.p>
-        
-        <motion.form 
-          ref={formRef}
-          className="contact-form"
-          onSubmit={handleSubmit}
-          variants={formVariants}
-          initial="hidden"
-          animate={isFormVisible ? "visible" : "hidden"}
-          style={{
-            willChange: 'transform, opacity',
-            transform: 'translateZ(0)',
-            backfaceVisibility: 'hidden',
-            perspective: 1000,
-            transformStyle: 'preserve-3d'
-          }}
+          {contactMethods.map((method) => {
+            const Icon = method.icon;
+            return (
+              <motion.a
+                key={method.id}
+                href={method.link}
+                target={method.id !== 'phone' ? '_blank' : undefined}
+                rel={method.id !== 'phone' ? 'noopener noreferrer' : undefined}
+                className="contact-method-card"
+                variants={itemVariants}
+                whileHover={{ 
+                  scale: 1.05,
+                  y: -5,
+                  transition: { duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  '--hover-color': method.hoverColor,
+                  '--accent-color': method.color
+                }}
+              >
+                <motion.div 
+                  className="contact-icon-wrapper"
+                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Icon size={32} style={{ color: method.color }} />
+                </motion.div>
+                <div className="contact-method-info">
+                  <h3>{method.name}</h3>
+                  <p>{method.label}</p>
+                </div>
+                <motion.div 
+                  className="contact-arrow"
+                  initial={{ x: 0 }}
+                  whileHover={{ x: -5 }}
+                >
+                  ←
+                </motion.div>
+              </motion.a>
+            );
+          })}
+        </motion.div>
+
+        <motion.div 
+          className="contact-footer"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <motion.div 
-            className="form-group"
-            variants={fieldVariants}
-            style={{
-              willChange: 'transform, opacity',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden'
-            }}
-          >
-            <label htmlFor="name">שם מלא</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              disabled={isSubmitting}
-              style={{
-                transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden'
-              }}
-            />
-          </motion.div>
-          
-          <motion.div 
-            className="form-group"
-            variants={fieldVariants}
-            style={{
-              willChange: 'transform, opacity',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden'
-            }}
-          >
-            <label htmlFor="email">אימייל</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={isSubmitting}
-              style={{
-                transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden'
-              }}
-            />
-          </motion.div>
-          
-          <motion.div 
-            className="form-group"
-            variants={fieldVariants}
-            style={{
-              willChange: 'transform, opacity',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden'
-            }}
-          >
-            <label htmlFor="phone">טלפון</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              disabled={isSubmitting}
-              style={{
-                transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden'
-              }}
-            />
-          </motion.div>
-          
-          <motion.div 
-            className="form-group"
-            variants={fieldVariants}
-            style={{
-              willChange: 'transform, opacity',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden'
-            }}
-          >
-            <label htmlFor="projectType">סוג הפרויקט</label>
-            <select
-              id="projectType"
-              name="projectType"
-              value={formData.projectType}
-              onChange={handleChange}
-              required
-              disabled={isSubmitting}
-              style={{
-                transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden'
-              }}
-            >
-              <option value="">בחר סוג פרויקט</option>
-              <option value="website">אתר אינטרנט</option>
-              <option value="app">אפליקציה</option>
-              <option value="system">מערכת עסקית</option>
-              <option value="other">אחר</option>
-            </select>
-          </motion.div>
-          
-          <motion.div 
-            className="form-group"
-            variants={fieldVariants}
-            style={{
-              willChange: 'transform, opacity',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden'
-            }}
-          >
-            <label htmlFor="message">הודעה (אופציונלי)</label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="ספרו לי קצת על הפרויקט שלכם..."
-              rows="5"
-              disabled={isSubmitting}
-              style={{
-                transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden'
-              }}
-            />
-          </motion.div>
-          
-          <motion.div
-            variants={fieldVariants}
-            style={{
-              willChange: 'transform, opacity',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden'
-            }}
-          >
-            <Button 
-              type="submit" 
-              variant="primary" 
-              className="submit-btn"
-              disabled={isSubmitting}
-              style={{
-                transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden',
-                opacity: isSubmitting ? 0.7 : 1,
-                cursor: isSubmitting ? 'not-allowed' : 'pointer'
-              }}
-            >
-              {isSubmitting ? 'שולח...' : 'שלח פנייה'}
-            </Button>
-          </motion.div>
-        </motion.form>
+          <p className="contact-availability">
+            ⚡ זמין לפרויקטים חדשים
+          </p>
+        </motion.div>
       </div>
     </section>
   );

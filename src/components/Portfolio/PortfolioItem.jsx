@@ -1,6 +1,7 @@
-// PortfolioItem.jsx - Optimized for mobile with anti-flickering
+// src/components/Portfolio/PortfolioItem.jsx
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { ExternalLink, Github, Play, FileText } from 'lucide-react';
 
 const PortfolioItem = ({ project, index = 0 }) => {
   // Detect if device supports hover (desktop) or not (mobile/tablet)
@@ -10,6 +11,36 @@ const PortfolioItem = ({ project, index = 0 }) => {
     }
     return false;
   }, []);
+
+  // Get the appropriate icon based on link type
+  const getLinkIcon = (linkType) => {
+    switch(linkType) {
+      case 'github':
+        return <Github size={18} />;
+      case 'demo':
+        return <Play size={18} />;
+      case 'case-study':
+        return <FileText size={18} />;
+      case 'live':
+      default:
+        return <ExternalLink size={18} />;
+    }
+  };
+
+  // Get the appropriate button text based on link type
+  const getLinkText = (linkType) => {
+    switch(linkType) {
+      case 'github':
+        return 'קוד מקור';
+      case 'demo':
+        return 'דמו';
+      case 'case-study':
+        return 'מקרה בוחן';
+      case 'live':
+      default:
+        return 'צפה באתר';
+    }
+  };
 
   // Optimized animation variants with hardware acceleration
   const itemVariants = {
@@ -140,6 +171,32 @@ const PortfolioItem = ({ project, index = 0 }) => {
             </motion.span>
           ))}
         </div>
+        
+        {/* Project Link Button */}
+        {project.link && (
+          <motion.div 
+            className="portfolio-link-container"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.4, 
+              delay: index * 0.1 + 0.5,
+              ease: [0.4, 0, 0.2, 1]
+            }}
+          >
+            <motion.a
+              href={project.link.startsWith('http') ? project.link : `https://${project.link}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="portfolio-link"
+              whileHover={supportsHover ? { scale: 1.05, y: -2 } : {}}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>{getLinkText(project.linkType)}</span>
+              {getLinkIcon(project.linkType)}
+            </motion.a>
+          </motion.div>
+        )}
       </motion.div>
     </motion.div>
   );
