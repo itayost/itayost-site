@@ -1,0 +1,155 @@
+/* Base Skeleton Styles */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(100, 255, 218, 0.05) 0%,
+    rgba(100, 255, 218, 0.1) 50%,
+    rgba(100, 255, 218, 0.05) 100%
+  );
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animation Variants */
+.skeleton--pulse {
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+.skeleton--wave::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100, 255, 218, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: skeletonWave 1.5s linear infinite;
+}
+
+/* Shape Variants */
+.skeleton--text {
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton--circular {
+  border-radius: 50%;
+}
+
+.skeleton--rectangular {
+  border-radius: 8px;
+}
+
+/* Animations */
+@keyframes skeletonPulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes skeletonWave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Card Skeletons */
+.skeleton-card {
+  background: rgba(17, 34, 64, 0.5);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.skeleton-card__image {
+  margin-bottom: 1rem;
+}
+
+.skeleton-card__content {
+  padding: 0.5rem 0;
+}
+
+/* Service Card Skeleton */
+.skeleton-service-card {
+  background: rgba(17, 34, 64, 0.5);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  text-align: center;
+}
+
+.skeleton-service-card__icon {
+  margin: 0 auto 1.5rem;
+}
+
+.skeleton-service-card__title {
+  margin: 0 auto 1.5rem;
+}
+
+.skeleton-service-card__items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Portfolio Item Skeleton */
+.skeleton-portfolio-item {
+  background: rgba(17, 34, 64, 0.5);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.skeleton-portfolio-item__image {
+  border-radius: 0;
+}
+
+.skeleton-portfolio-item__content {
+  padding: 1.5rem;
+}
+
+.skeleton-portfolio-item__tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skeleton-card,
+  .skeleton-service-card,
+  .skeleton-portfolio-item {
+    padding: 1rem;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton--pulse {
+    animation: none;
+    opacity: 0.7;
+  }
+  
+  .skeleton--wave::after {
+    animation: none;
+    display: none;
+  }
+}

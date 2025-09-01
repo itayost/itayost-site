@@ -1,10 +1,9 @@
 // src/components/WhatsAppFAB/WhatsAppFAB.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { SITE_CONFIG } from '../../utils/constants';
 import './WhatsAppFAB.css';
 
 const WhatsAppFAB = () => {
-  const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     const createFAB = () => {

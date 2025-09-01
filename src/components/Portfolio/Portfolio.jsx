@@ -1,12 +1,23 @@
 // Portfolio.jsx - Optimized parent component with anti-flickering
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SectionTitle from '../common/SectionTitle';
 import PortfolioItem from './PortfolioItem';
+import { SkeletonPortfolioItem } from '../common/Skeleton';
 import { portfolioData } from '../../data/portfolio';
 import './Portfolio.css';
 
 const Portfolio = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay for demonstration
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Memoize container variants to prevent recreation
   const containerVariants = useMemo(() => ({
     hidden: { 
@@ -74,7 +85,14 @@ const Portfolio = () => {
             transformStyle: 'preserve-3d'
           }}
         >
-          {renderPortfolioItems()}
+          {isLoading ? (
+            // Show skeleton screens while loading
+            Array(6).fill(0).map((_, index) => (
+              <SkeletonPortfolioItem key={`skeleton-${index}`} />
+            ))
+          ) : (
+            renderPortfolioItems()
+          )}
         </motion.div>
       </div>
     </section>

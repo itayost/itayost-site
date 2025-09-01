@@ -1,0 +1,130 @@
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--toggle-bg);
+  border: 2px solid var(--toggle-border);
+  color: var(--toggle-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 4px 20px var(--toggle-shadow);
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background: var(--toggle-hover-bg);
+  box-shadow: 0 6px 30px var(--toggle-hover-shadow);
+}
+
+.dark-mode-toggle__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark mode variables */
+:root.dark-mode {
+  --toggle-bg: rgba(17, 34, 64, 0.9);
+  --toggle-border: rgba(100, 255, 218, 0.3);
+  --toggle-color: #64FFDA;
+  --toggle-shadow: rgba(100, 255, 218, 0.2);
+  --toggle-hover-bg: rgba(17, 34, 64, 1);
+  --toggle-hover-shadow: rgba(100, 255, 218, 0.3);
+}
+
+/* Light mode variables */
+:root.light-mode {
+  --primary: #F0F4F8;
+  --secondary: #00B891;
+  --accent: #4A5568;
+  --light: #2D3748;
+  --white: #1A202C;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  
+  --toggle-bg: rgba(255, 255, 255, 0.9);
+  --toggle-border: rgba(0, 184, 145, 0.3);
+  --toggle-color: #00B891;
+  --toggle-shadow: rgba(0, 0, 0, 0.1);
+  --toggle-hover-bg: rgba(255, 255, 255, 1);
+  --toggle-hover-shadow: rgba(0, 0, 0, 0.2);
+}
+
+/* Light mode overrides */
+.light-mode {
+  background: linear-gradient(135deg, #F0F4F8 0%, #E2E8F0 100%);
+  color: #2D3748;
+}
+
+.light-mode .navbar-simple-fixed {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(0, 184, 145, 0.2) !important;
+}
+
+.light-mode .hero {
+  background: linear-gradient(135deg, #F0F4F8 0%, #E2E8F0 100%);
+}
+
+.light-mode .service-card,
+.light-mode .portfolio-item,
+.light-mode .feature-card,
+.light-mode .process-step {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 184, 145, 0.2);
+  color: #2D3748;
+}
+
+.light-mode .section-title {
+  color: #1A202C;
+}
+
+.light-mode .contact {
+  background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E0 100%);
+}
+
+.light-mode .footer {
+  background: #1A202C;
+  color: #F0F4F8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dark-mode-toggle {
+    width: 45px;
+    height: 45px;
+    top: 80px;
+    left: 15px;
+  }
+}
+
+/* Animation */
+@keyframes sunRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moonWobble {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .dark-mode-toggle,
+  .dark-mode-toggle__icon {
+    transition: none;
+  }
+}

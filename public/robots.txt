@@ -1,22 +1,36 @@
-# Robots.txt for itayost.com
-# Allow all crawlers
+# Robots.txt for https://www.itayost.com
 
 User-agent: *
 Allow: /
-Disallow: /admin/
 Disallow: /api/
-Disallow: *.pdf$
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /node_modules/
+Disallow: /src/
 
 # Sitemap location
-Sitemap: https://itayost.com/sitemap.xml
+Sitemap: https://www.itayost.com/sitemap.xml
 
-# Crawl-delay (optional - slows down crawling if needed)
-# Crawl-delay: 1
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
 
-# Google specific
-User-agent: Googlebot
-Allow: /
+# Allow search engines to index images
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
 
-# Bing specific
-User-agent: Bingbot
-Allow: /
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

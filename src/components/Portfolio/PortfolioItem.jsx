@@ -2,6 +2,7 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Play, FileText } from 'lucide-react';
+import LazyImage from '../common/LazyImage';
 
 const PortfolioItem = ({ project, index = 0 }) => {
   // Detect if device supports hover (desktop) or not (mobile/tablet)
@@ -116,11 +117,9 @@ const PortfolioItem = ({ project, index = 0 }) => {
         }}
       >
         {project.image ? (
-          <img 
+          <LazyImage
             src={project.image} 
             alt={project.title}
-            loading="lazy" // Lazy load images
-            decoding="async" // Async decoding for better performance
             style={{
               willChange: 'transform',
               transform: 'translateZ(0)'

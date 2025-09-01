@@ -1,5 +1,5 @@
 // src/components/Hero/Hero.jsx - OPTIMIZED VERSION
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Button from '../common/Button';

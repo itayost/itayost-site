@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - העמוד לא נמצא | ItayOst</title>
+  <meta name="description" content="העמוד שחיפשת לא נמצא. חזור לדף הבית של ItayOst לפתרונות דיגיטליים מתקדמים.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, #0A192F 0%, #112240 100%);
+      color: #E6F1FF;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      direction: rtl;
+    }
+    
+    .container {
+      text-align: center;
+      max-width: 600px;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .error-code {
+      font-size: 8rem;
+      font-weight: bold;
+      color: #64FFDA;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 30px rgba(100, 255, 218, 0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.8;
+      }
+    }
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #CCD6F6;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      color: #8892B0;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    
+    .btn-primary {
+      background: #64FFDA;
+      color: #0A192F;
+    }
+    
+    .btn-primary:hover {
+      background: #4fccb3;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: #64FFDA;
+      border: 1px solid #64FFDA;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(100, 255, 218, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .decoration {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .decoration-1 {
+      top: -150px;
+      left: -150px;
+    }
+    
+    .decoration-2 {
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -10s;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(30px, -30px) scale(1.1);
+      }
+      66% {
+        transform: translate(-20px, 20px) scale(0.9);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 5rem;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+      
+      .buttons {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="decoration decoration-1"></div>
+  <div class="decoration decoration-2"></div>
+  
+  <div class="container">
+    <div class="error-code">404</div>
+    <h1>אופס! העמוד לא נמצא</h1>
+    <p>
+      נראה שהגעת לעמוד שלא קיים או שהועבר למקום אחר.<br>
+      אל דאגה, תמיד אפשר לחזור לדף הבית ולהתחיל מחדש.
+    </p>
+    <div class="buttons">
+      <a href="/" class="btn btn-primary">חזרה לדף הבית</a>
+      <a href="/#contact" class="btn btn-secondary">צור קשר</a>
+    </div>
+  </div>
+  
+  <script>
+    // Redirect to home page after 10 seconds
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 10000);
+  </script>
+</body>
+</html>
