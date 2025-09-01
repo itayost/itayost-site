@@ -4,7 +4,6 @@ import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import LazySection from './components/common/LazySection';
 import ScrollToTop from './components/common/ScrollToTop';
-import DarkModeToggle from './components/common/DarkModeToggle';
 import Analytics from './components/Analytics/Analytics';
 import { useKeyboardNavigation } from './hooks/useKeyboardNavigation';
 import './App.css';
@@ -75,7 +74,6 @@ function App() {
       </Suspense>
       
       <ScrollToTop />
-      <DarkModeToggle />
     </div>
   );
 }

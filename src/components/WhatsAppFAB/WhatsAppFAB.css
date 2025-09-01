@@ -136,18 +136,3 @@
     transition: opacity 0.2s ease !important;
   }
 }
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .whatsapp-tooltip {
-    background: #1a1a1a;
-    color: #25D366;
-    box-shadow: 
-      0 4px 12px rgba(0, 0, 0, 0.3),
-      0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .whatsapp-tooltip .tooltip-arrow {
-    border-color: transparent #1a1a1a transparent transparent;
-  }
-}
