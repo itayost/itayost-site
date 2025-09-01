@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import SectionTitle from '../common/SectionTitle';
 import { servicesData } from '../../data/services';
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import { trackEvent } from '../../utils/analytics';
 import './Services.css';
 
 // ServiceCard as a separate memoized component
@@ -83,12 +84,14 @@ const ServiceCard = React.memo(({ service, index }) => {
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
       whileHover={hoverAnimation}
+      onClick={() => trackEvent('service_interact', 'Services', service.title)}
       style={{
         willChange: 'transform, opacity',
         transform: 'translateZ(0)',
         backfaceVisibility: 'hidden',
         perspective: 1000,
-        transformStyle: 'preserve-3d'
+        transformStyle: 'preserve-3d',
+        cursor: 'pointer'
       }}
     >
       <motion.div 

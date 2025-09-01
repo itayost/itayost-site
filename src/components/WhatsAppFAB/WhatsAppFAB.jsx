@@ -1,6 +1,7 @@
 // src/components/WhatsAppFAB/WhatsAppFAB.jsx
 import React, { useEffect } from 'react';
 import { SITE_CONFIG } from '../../utils/constants';
+import { trackWhatsAppClick } from '../../utils/analytics';
 import './WhatsAppFAB.css';
 
 const WhatsAppFAB = () => {
@@ -76,6 +77,11 @@ const WhatsAppFAB = () => {
         hoverTimeout = setTimeout(() => {
           tooltip.style.display = 'none';
         }, 300);
+      });
+
+      // Track WhatsApp clicks
+      fab.addEventListener('click', () => {
+        trackWhatsAppClick();
       });
 
       // Show tooltip automatically after 3 seconds

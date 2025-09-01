@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Play, FileText } from 'lucide-react';
 import LazyImage from '../common/LazyImage';
+import { trackEvent } from '../../utils/analytics';
 
 const PortfolioItem = ({ project, index = 0 }) => {
   // Detect if device supports hover (desktop) or not (mobile/tablet)
@@ -190,6 +191,7 @@ const PortfolioItem = ({ project, index = 0 }) => {
               className="portfolio-link"
               whileHover={supportsHover ? { scale: 1.05, y: -2 } : {}}
               whileTap={{ scale: 0.95 }}
+              onClick={() => trackEvent('portfolio_view', 'Portfolio', project.title)}
             >
               <span>{getLinkText(project.linkType)}</span>
               {getLinkIcon(project.linkType)}
