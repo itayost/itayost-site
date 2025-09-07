@@ -48,3 +48,38 @@
     gap: 20px;
   }
 }
+
+/* Add these styles to your existing Footer.css file */
+
+.legal-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  font-size: 0.9rem;
+}
+
+.legal-links a {
+  color: var(--light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  opacity: 0.8;
+}
+
+.legal-links a:hover {
+  color: var(--secondary);
+  opacity: 1;
+}
+
+.legal-links .separator {
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .legal-links {
+    font-size: 0.85rem;
+    gap: 10px;
+  }
+}

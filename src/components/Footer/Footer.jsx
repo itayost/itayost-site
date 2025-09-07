@@ -19,6 +19,7 @@ const Footer = () => {
         >
           {SITE_CONFIG.name}
         </motion.div>
+        
         <motion.div 
           className="social-links"
           initial={{ opacity: 0, y: 20 }}
@@ -87,6 +88,23 @@ const Footer = () => {
             </svg>
           </motion.a>
         </motion.div>
+        
+        <motion.div 
+          className="legal-links"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <a href="/privacy-policy.html" aria-label="מדיניות פרטיות">
+            מדיניות פרטיות
+          </a>
+          <span className="separator">|</span>
+          <a href="/terms.html" aria-label="תנאי שימוש">
+            תנאי שימוש
+          </a>
+        </motion.div>
+        
         <motion.div 
           className="copyright"
           initial={{ opacity: 0 }}
