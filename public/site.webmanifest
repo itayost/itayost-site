@@ -1,21 +1,42 @@
 {
-  "name": "ItayOst",
+  "name": "ItayOst - פיתוח דיגיטלי לעסקים",
   "short_name": "ItayOst",
+  "description": "פתרונות דיגיטליים מותאמים אישית לעסקים",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A192F",
+  "theme_color": "#64FFDA",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
     }
   ],
-  "theme_color": "#279185",
-  "background_color": "#279185",
-  "display": "standalone"
+  "categories": ["business", "developer", "productivity"],
+  "lang": "he-IL",
+  "dir": "rtl"
 }
